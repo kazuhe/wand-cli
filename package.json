@@ -1,0 +1,29 @@
+{
+  "name": "wand-cli",
+  "version": "1.0.0",
+  "description": "Node.js CLI memo tool",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kazuhe/wand-cli.git"
+  },
+  "keywords": [
+    "wand",
+    "wand-cli"
+  ],
+  "author": "kazuhe <omc.ohara@gmail.com> (https://github.com/kazuhe)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kazuhe/wand-cli/issues"
+  },
+  "homepage": "https://github.com/kazuhe/wand-cli#readme",
+  "devDependencies": {
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "prettier": "^2.3.0"
+  }
+}
