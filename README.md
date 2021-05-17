@@ -2,4 +2,4 @@
 Node.js CLI memo tool
 
 # License
-MIT License © 2021 kazuhe
+MIT License © 2021 [kazuhe](https://github.com/kazuhe)
