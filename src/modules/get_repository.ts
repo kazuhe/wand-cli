@@ -1,17 +1,17 @@
 import { exec } from 'child_process'
+import colors from 'colors'
 
-type Callback = (err: Error | null, result: string) => void | null
+export default (name: string, target: string) => {
+  console.log(colors.dim('Cloning...'))
 
-export default (name: string, callback: Callback) => {
-  // TODO: 特定のファイル（.git等）が存在する場合は早期リターン
-  exec(`git clone ${name}`, (error, stdout, stderr) => {
+  exec(`git clone ${name} ${target}`, (error) => {
     if (error) {
-      console.error(`[exec error]: ${error}`)
-      callback(error, 'リポジトリのcloneに失敗しました')
-      return
+      console.error(colors.bgRed.black('Failed') + ' Repository clone failed')
+      throw new Error(error.toString())
     }
-    callback(null, 'リポジトリのcloneに成功しました')
-    console.log(`[stdout]: ${stdout}`)
-    console.error(`[stderr]: ${stderr}`)
+
+    console.error(
+      colors.bgGreen.black('Success') + ` 🎉 Clone repository! ${name}`
+    )
   })
 }

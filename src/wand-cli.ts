@@ -1,20 +1,15 @@
 import fs from 'fs'
-import readline from 'readline'
+import os from 'os'
 import marked from 'marked'
 import getRepository from './modules/get_repository'
+import { question } from './modules/helper_readline'
 
-const rl = readline.createInterface({
-  input: process.stdin,
-  output: process.stdout,
-})
+const TARGET_DIR = os.homedir() + '/wand-cli/'
 
-rl.question('リポジトリのURLを入力してください > ', (name: string) => {
-  console.log('cloneしています...')
-  getRepository(name, (err, result) => {
-    if (err) {
-      console.log(result)
-      return
-    }
+// If the repository does not exist in the user's home directory
+if (!fs.existsSync(TARGET_DIR)) {
+  question('リポジトリのURLを入力してください > ').then((repo) => {
+    getRepository(repo, TARGET_DIR)
 
     // TODO: memoのmdファイルを取得、無ければ作成
     const filePath = './README.md'
@@ -29,9 +24,9 @@ rl.question('リポジトリのURLを入力してください > ', (name: string
       console.log('[Sucess]', html)
     })
   })
-
-  rl.close()
-})
+} else {
+  console.log('The repository already exist!')
+}
 
 // import program from 'commander'
 // // コマンドライン引数を取得し扱い易い形式にパース
