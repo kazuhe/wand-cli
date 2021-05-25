@@ -24,7 +24,7 @@
   },
   "homepage": "https://github.com/kazuhe/wand-cli#readme",
   "bin": {
-    "wand-cli": "bin/wand-cli"
+    "wand": "bin/wand"
   },
   "files": [
     "bin",
