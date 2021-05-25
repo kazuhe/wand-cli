@@ -1,5 +1,4 @@
-# macOS
 .DS_Store
-
-# Dependency directories
 node_modules/
+lib/*
+!lib/README.md
