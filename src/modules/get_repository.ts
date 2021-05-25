@@ -1,17 +1,15 @@
 import { exec } from 'child_process'
-import colors from 'colors'
+import chalk from 'chalk'
 
 export default (name: string, target: string) => {
-  console.log(colors.dim('Cloning...'))
+  console.log(chalk.dim('cloning...'))
 
   exec(`git clone ${name} ${target}`, (error) => {
     if (error) {
-      console.error(colors.bgRed.black('Failed') + ' Repository clone failed')
+      console.error(chalk.red('failed') + ' Repository clone failed')
       throw new Error(error.toString())
     }
 
-    console.error(
-      colors.bgGreen.black('Success') + ` 🎉 Clone repository! ${name}`
-    )
+    console.log(chalk.green('success') + ` 🎉 Clone repository! ${name}`)
   })
 }

@@ -1,5 +1,4 @@
 import readline from 'readline'
-import colors from 'colors'
 
 /**
  * Ask questions on the command line
@@ -10,7 +9,7 @@ export const question = (question: string): Promise<string> => {
     output: process.stdout,
   })
   return new Promise((resolve) => {
-    rl.question('\n' + colors.dim(question), (answer) => {
+    rl.question(question + ' ', (answer) => {
       resolve(answer)
       rl.close()
     })
