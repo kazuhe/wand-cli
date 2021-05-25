@@ -6,6 +6,7 @@ type Commands = { [command: string]: () => Promise<() => void> }
 /**
  * Read command options and execute if they exist.
  */
+program.option('init', 'Register and set up the repository')
 program.parse(process.argv)
 const option = program.args[0]
 
