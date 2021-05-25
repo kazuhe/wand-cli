@@ -17,7 +17,7 @@ Node.js CLI memo tool
 ## Usage
 
 ### Installation
-`npx`でWand CLIを実行するために`-g`オプションを使用してバイナリをグローバルにインストールします。
+`npx`でWand CLIを実行するために`-g`オプションを使用してライブラリをグローバルにインストールします。
 ```bash
 $ npm i -g wand-cli
 ```
