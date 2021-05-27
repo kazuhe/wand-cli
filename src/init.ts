@@ -4,6 +4,7 @@ import { exec } from 'child_process'
 // import marked from 'marked'
 import { question } from './modules/helper_readline'
 import chalk from 'chalk'
+import { help } from './help'
 
 const TARGET_DIR = os.homedir() + '/wand/'
 
@@ -28,7 +29,10 @@ export const init = () => {
       }
     )
   } else {
-    console.log('Initial setting is already completed 🧙✨')
+    console.log(
+      "Initial setting is already completed 🧙✨\n\nLet's enter the following command!"
+    )
+    help()
   }
 }
 

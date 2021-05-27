@@ -1,22 +1,21 @@
-import program from 'commander'
 import chalk from 'chalk'
 
-type Commands = { [command: string]: () => Promise<() => void> }
-
 /**
- * Read command options and execute if they exist.
+ * Read command arguments and execute if they exist.
  */
-program.option('init', 'Register and set up the repository')
-program.parse(process.argv)
-const option = program.args[0]
 
+const arg = process.argv[2]
+
+type Commands = { [command: string]: () => Promise<() => void> }
 const commands: Commands = {
+  '--help': async () => await import('./help').then((result) => result.help),
+  '-h': async () => await import('./help').then((result) => result.help),
   init: async () => await import('./init').then((result) => result.init),
 }
 
-if (!commands[option]) {
+if (!commands[arg]) {
   console.log(chalk.red('💥 Corresponding command does not exist.'))
   process.exit(1)
 }
 
-commands[option]().then((result) => result())
+commands[arg]().then((result) => result())
