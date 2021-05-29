@@ -11,10 +11,14 @@ const commands: Commands = {
   '--help': async () => await import('./help').then((result) => result.help),
   '-h': async () => await import('./help').then((result) => result.help),
   init: async () => await import('./init').then((result) => result.init),
+  new: async () => await import('./new').then((result) => result.newMemo),
 }
 
+// TODO: newはinit処理が完了している場合のみ実行させる
+
 if (!commands[arg]) {
-  console.log(chalk.red('💥 Corresponding command does not exist.'))
+  console.log(chalk.red('\n💥 Corresponding command does not exist.'))
+  console.log(chalk.dim('\nTry typing --help, -h\n'))
   process.exit(1)
 }
 

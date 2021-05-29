@@ -1,16 +1,22 @@
 import readline from 'readline'
+import chalk from 'chalk'
 
 /**
  * Ask questions on the command line
  */
-export const question = (question: string): Promise<string> => {
+export const question = (
+  question: string,
+  initialValue?: string
+): Promise<string> => {
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
   })
+  const initV = initialValue ? chalk.dim(` (${initialValue})`) : ''
   return new Promise((resolve) => {
-    rl.question(question + ' ', (answer) => {
-      resolve(answer)
+    // TODO: 空の文字列の場合の処理
+    rl.question(`${question} >${initV}`, (answer) => {
+      answer ? resolve(answer) : resolve(initialValue || answer)
       rl.close()
     })
   })

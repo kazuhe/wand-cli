@@ -35,16 +35,3 @@ export const init = () => {
     help()
   }
 }
-
-// TODO: memoのmdファイルを取得、無ければ作成
-// const filePath = './README.md'
-// fs.readFile(filePath, { encoding: 'utf8' }, (err, file) => {
-//   if (err) {
-//     console.log('[Error]', err.message)
-//     process.exit(1)
-//   }
-
-//   // Markdownをhtmlに変換
-//   const html = marked(file)
-//   console.log('[Sucess]', html)
-// })
