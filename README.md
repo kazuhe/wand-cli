@@ -29,11 +29,24 @@ $ npm i -g wand-cli
 $ npx wand --help
 ```
 
-
 まずは初期設定でメモを管理するためのリモートリポジトリのURLを登録します。  
 下記コマンドを実行すると、対話形式でURLを求められるので入力してください。内部的には`git clone`を行っており、成功するとユーザーのホームディレクトリ直下に`/wand`ディレクトリが作成されます。
 ```bash
 $ npx wand init
+```
+
+初期設定が完了したら下記のコマンドで新しいメモを作成してみましょう。  
+対話形式でメモのファイル名を聞かれます。特に指定がない場合はエンターを押してください。ランダムな文字列の`.md`ファイルが作成されます。
+```bash
+$ npx wand new
+```
+
+## Commadns
+```
+COMMANDS:
+  wand init         Set up the repository and start Wand CLI.
+  wand new          Create a new memo.
+  wand --help, -h   Show help
 ```
 
 ## License
