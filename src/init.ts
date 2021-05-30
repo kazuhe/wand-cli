@@ -18,7 +18,7 @@ export const init = () => {
          */
         exec(`git clone ${repositoryName} ${TARGET_DIR}`, (error) => {
           if (error) {
-            console.error(chalk.red('\nfailed') + ' Repository clone failed\n')
+            console.error(chalk.red('\nfailure') + ' Repository clone failed\n')
             throw new Error(error.toString())
           }
           console.log(

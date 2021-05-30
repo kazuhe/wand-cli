@@ -6,20 +6,24 @@ import { question } from './modules/helper_readline'
 
 const TARGET_DIR = os.homedir() + '/wand/'
 
+/**
+ * Create new memo
+ */
 export const newMemo = async () => {
   const nanoid = customAlphabet('1234567890abcdefghijklmnopqestuvwxyz', 10)
-  const id = await nanoid()
-  console.log(id)
+  const uniqueString = nanoid()
 
-  question(chalk.green('? ') + 'Memo name', id)
-    .then((name) => {
-      // TODO: 既に存在しているファイル名が入力された場合は再度質問
-      const fileWriteStream = fs.createWriteStream(`${TARGET_DIR}/${name}.md`)
-      fileWriteStream.end()
-      return name
-    })
-    .then((name) =>
-      console.log(chalk.green('\nsuccess') + ` 📄 ${name} created!`)
+  const fileName = await question(chalk.green('? ') + 'memo name', uniqueString)
+
+  try {
+    // 「flag: 'wx'」= Throw an error if the file already exists.
+    fs.writeFileSync(`${TARGET_DIR}${fileName}.md`, '', { flag: 'wx' })
+    console.log(
+      chalk.green('\nsuccess: ') + `"${fileName}.md"が作成されました\n`
     )
-  // TODO: エラー処理
+  } catch {
+    console.log(
+      chalk.red('\nfailure: ') + `"${fileName}.md"は既に存在しています\n`
+    )
+  }
 }
