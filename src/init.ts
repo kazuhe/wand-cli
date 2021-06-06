@@ -22,17 +22,26 @@ export const init = () => {
           throw new Error(err.toString())
         }
 
-        exec('git init', (err) => {
-          if (err) throw new Error(err.toString())
-        })
+        exec(
+          `git --git-dir=${TARGET_DIR}.git --work-tree=${TARGET_DIR} init`,
+          (err) => {
+            if (err) throw new Error(err.toString())
+          }
+        )
 
-        exec('git branch -M main', (err) => {
-          if (err) throw new Error(err.toString())
-        })
+        exec(
+          `git --git-dir=${TARGET_DIR}.git --work-tree=${TARGET_DIR} branch -M main`,
+          (err) => {
+            if (err) throw new Error(err.toString())
+          }
+        )
 
-        exec(`git remote add origin ${repositoryName}`, (err) => {
-          if (err) throw new Error(err.toString())
-        })
+        exec(
+          `git --git-dir=${TARGET_DIR}.git --work-tree=${TARGET_DIR} remote add origin ${repositoryName}`,
+          (err) => {
+            if (err) throw new Error(err.toString())
+          }
+        )
 
         // fs.mkdir(`${TARGET_DIR}`, (err) => {
         //   if (err) throw new Error(err.toString())
