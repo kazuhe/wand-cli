@@ -13,6 +13,7 @@ const commands: Commands = {
   init: async () => await import('./init').then((result) => result.init),
   new: async () => await import('./new').then((result) => result.newMemo),
   list: async () => await import('./list').then((result) => result.list),
+  save: async () => await import('./save').then((result) => result.save),
 }
 
 // TODO: newはinit処理が完了している場合のみ実行させる

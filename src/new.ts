@@ -4,7 +4,7 @@ import { customAlphabet } from 'nanoid'
 import chalk from 'chalk'
 import { question } from './modules/helper_readline'
 
-const TARGET_DIR = os.homedir() + '/wand/_non_category/'
+const TARGET_DIR = os.homedir() + '/wand/'
 
 /**
  * Create new memo

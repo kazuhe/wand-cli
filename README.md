@@ -49,5 +49,8 @@ COMMANDS:
   wand --help, -h   Show help
 ```
 
+## Prerequisites
+⚠️ 前提として、gitコマンドそのものが利用できる環境である必要があります。  
+
 ## License
 MIT License © 2021 [kazuhe](https://github.com/kazuhe)
