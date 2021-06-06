@@ -12,10 +12,10 @@ export const question = (
     input: process.stdin,
     output: process.stdout,
   })
-  const initV = initialValue ? chalk.dim(` (${initialValue}) `) : ''
+  const initV = initialValue ? chalk.dim(`(${initialValue}) `) : ''
   return new Promise((resolve) => {
     // TODO: 空の文字列の場合の処理
-    rl.question(`${question}:${initV}`, (answer) => {
+    rl.question(`${question}: ${initV}`, (answer) => {
       answer ? resolve(answer) : resolve(initialValue || answer)
       rl.close()
     })

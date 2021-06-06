@@ -4,7 +4,7 @@ import { customAlphabet } from 'nanoid'
 import chalk from 'chalk'
 import { question } from './modules/helper_readline'
 
-const TARGET_DIR = os.homedir() + '/wand/'
+const TARGET_DIR = os.homedir() + '/wand/_non_category/'
 
 /**
  * Create new memo
@@ -21,9 +21,9 @@ export const newMemo = async () => {
     console.log(
       chalk.green('\nsuccess: ') + `"${fileName}.md"が作成されました\n`
     )
-  } catch {
+  } catch (err) {
     console.log(
-      chalk.red('\nfailure: ') + `"${fileName}.md"は既に存在しています\n`
+      chalk.red('\nfailure: ') + `"${fileName}.md"は既に存在しています\n${err}`
     )
   }
 }

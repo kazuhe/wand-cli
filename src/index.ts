@@ -12,6 +12,7 @@ const commands: Commands = {
   '-h': async () => await import('./help').then((result) => result.help),
   init: async () => await import('./init').then((result) => result.init),
   new: async () => await import('./new').then((result) => result.newMemo),
+  list: async () => await import('./list').then((result) => result.list),
 }
 
 // TODO: newはinit処理が完了している場合のみ実行させる
