@@ -1,6 +1,6 @@
 {
   "name": "wand-cli",
-  "version": "0.4.2",
+  "version": "0.4.3",
   "description": "Node.js CLI memo tool",
   "main": "index.js",
   "scripts": {
