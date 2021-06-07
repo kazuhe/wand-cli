@@ -1,62 +1,42 @@
 import fs from 'fs'
-import os from 'os'
-import { exec } from 'child_process'
-import { question } from './modules/helper_readline'
+import child_process from 'child_process'
+import util from 'util'
+import { question } from './utils/helper_readline'
 import chalk from 'chalk'
-import { help } from './help'
+import help from './help'
 
-const TARGET_DIR = os.homedir() + '/wand/'
+export default async (dirpath: string) => {
+  const exec = util.promisify(child_process.exec)
+  const gitOptions = `--git-dir=${dirpath}/.git --work-tree=${dirpath}`
 
-export const init = () => {
   // If the repository does not exist in the user's home directory
-  if (!fs.existsSync(TARGET_DIR)) {
+  if (!fs.existsSync(dirpath)) {
     question(chalk.green('? ') + 'repository URL').then((repositoryName) => {
-      /**
-       * Get repository.
-       */
-      exec(`git clone ${repositoryName} ${TARGET_DIR}`, (err) => {
-        if (err) {
-          console.error(
-            chalk.red('\nfailure: ') + 'リポジトリのクローンに失敗しました\n'
+      const repository = /.*\.git$/.test(repositoryName)
+        ? repositoryName
+        : `${repositoryName}.git`
+
+      exec(`git clone ${repository} ${dirpath}`)
+        .then(() => exec(`git ${gitOptions} branch -M main`))
+        .then(() => {
+          console.log(
+            chalk.green('\nsuccess: ') +
+              `🎉 "${repository}"をクローンしました\n\nこれでWand CLIの初期設定が完了しました🧙✨\n下記のコマンドを試してください`
           )
-          throw new Error(err.toString())
-        }
-
-        exec(
-          `git --git-dir=${TARGET_DIR}.git --work-tree=${TARGET_DIR} init`,
-          (err) => {
-            if (err) throw new Error(err.toString())
+          help()
+        })
+        .catch((err) => {
+          if (err) {
+            console.error(
+              chalk.red('\nfailure: ') + 'リポジトリのクローンに失敗しました\n'
+            )
+            throw new Error(err.toString())
           }
-        )
-
-        exec(
-          `git --git-dir=${TARGET_DIR}.git --work-tree=${TARGET_DIR} branch -M main`,
-          (err) => {
-            if (err) throw new Error(err.toString())
-          }
-        )
-
-        exec(
-          `git --git-dir=${TARGET_DIR}.git --work-tree=${TARGET_DIR} remote add origin ${repositoryName}`,
-          (err) => {
-            if (err) throw new Error(err.toString())
-          }
-        )
-
-        // fs.mkdir(`${TARGET_DIR}`, (err) => {
-        //   if (err) throw new Error(err.toString())
-        // })
-
-        console.log(
-          chalk.green('\nsuccess: ') +
-            `🎉 "${repositoryName}"をクローンしました\n\nこれでWand CLIの初期設定が完了しました🧙✨\n下記のコマンドを入力してみてください`
-        )
-        help()
-      })
+        })
     })
   } else {
     console.log(
-      '\nWand CLIの初期設定は既に完了しています🧙✨\n下記のコマンドを入力してみてください'
+      '\nWand CLIの初期設定は既に完了しています🧙✨\n下記のコマンドを試してください'
     )
     help()
   }

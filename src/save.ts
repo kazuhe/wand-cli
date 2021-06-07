@@ -1,19 +1,26 @@
-import os from 'os'
-import { exec } from 'child_process'
+import child_process from 'child_process'
+import util from 'util'
+import chalk from 'chalk'
 
-const TARGET_DIR = os.homedir() + '/wand/'
+export default async (dirpath: string) => {
+  const exec = util.promisify(child_process.exec)
+  const gitOptions = `--git-dir=${dirpath}/.git --work-tree=${dirpath}`
 
-export const save = async () => {
-  console.log('save')
-  exec(`git --git-dir=${TARGET_DIR}.git --work-tree=${TARGET_DIR} add .`)
-  exec(
-    `git --git-dir=${TARGET_DIR}.git --work-tree=${TARGET_DIR} commit --allow-empty-message -m ""`
-  )
-  exec(
-    `git --git-dir=${TARGET_DIR}.git --work-tree=${TARGET_DIR} push -u origin main`,
-    (err, stdout) => {
-      if (err) throw new Error(err.toString())
-      console.log(stdout)
-    }
-  )
+  exec(`git ${gitOptions} add .`)
+    .then(() => exec(`git ${gitOptions} commit -m "commit"`))
+    .then(() =>
+      exec(`git ${gitOptions} push -u origin main`).then(() =>
+        console.log(
+          chalk.green('\nsuccess: ') +
+            `🎉 リモートリポジトリへの保存に成功しました🧙✨\n`
+        )
+      )
+    )
+    .catch((err) => {
+      console.error(
+        chalk.red('\nfailure: ') +
+          '🙅‍♂️ リモートリポジトリへの保存に失敗しました\n'
+      )
+      throw new Error(err.toString())
+    })
 }

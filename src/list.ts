@@ -1,11 +1,8 @@
-import os from 'os'
 import fs from 'fs'
 import path from 'path'
 import chalk from 'chalk'
 
-const TARGET_DIR = os.homedir() + '/wand/'
-
-const showFiles = (dirpath: string) => {
+const showFiles = async (dirpath: string) => {
   fs.readdir(dirpath, { withFileTypes: true }, (err, dirents) => {
     if (err) throw new Error(err.toString())
 
@@ -21,6 +18,6 @@ const showFiles = (dirpath: string) => {
   })
 }
 
-export const list = async () => {
-  showFiles(`${TARGET_DIR}`)
+export default async (dirpath: string) => {
+  showFiles(dirpath)
 }

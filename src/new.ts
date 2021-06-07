@@ -1,15 +1,12 @@
-import os from 'os'
 import fs from 'fs'
 import { customAlphabet } from 'nanoid'
 import chalk from 'chalk'
-import { question } from './modules/helper_readline'
-
-const TARGET_DIR = os.homedir() + '/wand/'
+import { question } from './utils/helper_readline'
 
 /**
  * Create new memo
  */
-export const newMemo = async () => {
+export default async (dirpath: string) => {
   const nanoid = customAlphabet('1234567890abcdefghijklmnopqestuvwxyz', 10)
   const uniqueString = nanoid()
 
@@ -17,7 +14,7 @@ export const newMemo = async () => {
 
   try {
     // 「flag: 'wx'」= Throw an error if the file already exists.
-    fs.writeFileSync(`${TARGET_DIR}${fileName}.md`, '', { flag: 'wx' })
+    fs.writeFileSync(`${dirpath}/${fileName}.md`, '', { flag: 'wx' })
     console.log(
       chalk.green('\nsuccess: ') + `"${fileName}.md"が作成されました\n`
     )
