@@ -8,16 +8,12 @@
     "skipLibCheck": false,
     "module": "commonjs",
     "outDir": "./lib",
-    "rootDir": "./src"
+    "rootDir": "./src/server",
+    "types": [
+      "@types/node",
+    ]
   },
   "include": [
-    "./src/**/*"
+    "./src/server/**/*"
   ],
-  "exclude": [
-    "node_modules",
-    "lib",
-    "bin",
-    "src/**/*.(spec|test).(ts|js)",
-    "test/**/*"
-  ]
 }
